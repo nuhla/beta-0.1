@@ -15,6 +15,8 @@ public class ChangeCare : MonoBehaviour
 
     public Behaviour tt;
 
+    public GameObject destroyBehv;
+
     public GameObject CameraController;
 
     private GameObject destenation;
@@ -37,23 +39,28 @@ public class ChangeCare : MonoBehaviour
 
 
 
-        this.trafficSystem.GetComponent<TrafficSystem>().player = Colider.transform.parent.transform;
+        trafficSystem.GetComponent<TrafficSystem>().player = Colider.transform.transform;
         CameraController.SetActive(false);
         tt.enabled = false;
-        Colider.GetComponent<ChangeCare>().CameraController.SetActive(true);
-        destenation.GetComponent<ChangeCare>().tt.enabled = true;
 
+        Debug.Log(Colider.transform.tag + "555555");
+
+        //Colider.GetComponent<ChangeCare>().GetComponent<TrafficSystem>().player = Colider.transform.transform;
+        destenation.GetComponent<ChangeCare>().CameraController.SetActive(true);
+        destenation.GetComponent<ChangeCare>().tt.enabled = true;
+        Debug.Log(this.transform.parent.tag + "666666666666666");
+        GameObject parent = transform.parent.gameObject;
         Destroy(this);
 
     }
     private void OnTriggerEnter(Collider other)
     {
 
-        Debug.Log(other.transform.parent.gameObject.tag + "555555");
+
         if (other.transform.parent.gameObject.tag == "InUseCare")
         {
             destenation = other.transform.gameObject;
-            CopyComponent(other.transform.gameObject);
+            CopyComponent(other.transform.parent.gameObject);
 
             Debug.Log(" in If ");
         }
