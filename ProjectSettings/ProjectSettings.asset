@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 20
-  productGUID: 00000000000000000000000000000000
+  productGUID: 785c0d6fe4ef4e3439e139078135fef9
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -698,7 +698,7 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   cloudProjectId: dfaa3f3d-0f75-4e54-a14b-1e7a9b574261
   framebufferDepthMemorylessMode: 0
-  projectName: 
+  projectName: beta 0.1
   organizationId: nuhlamasri
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
