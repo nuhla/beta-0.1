@@ -55,12 +55,13 @@ public class GameManeger : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E)) {
+        if (Input.GetKeyDown(KeyCode.O))
+        {
             /** 
              * we will get the curren user and stope the cat 
              * if there is a nother care to Ride 
             **/
-            if(CurrentPlayer != null && NextPlayer != null)
+            if (CurrentPlayer != null && NextPlayer != null)
             {
                 // here we check the speed in case the user is still driving 
                 if(CurrentPlayer.gameObject.GetComponentInChildren<VehicleBehaviour>().vehicle.speed > 0)
@@ -105,24 +106,24 @@ public class GameManeger : MonoBehaviour
 
         Debug.Log("In Exit Care ");
         HumanPrefab.SetActive(true);
-        HumanPrefab.transform.position = new Vector3(CurrentPlayer.position.x, CurrentPlayer.position.y + 1f, CurrentPlayer.position.z);
-       
+        HumanPrefab.transform.position = CurrentPlayer.gameObject.GetComponentInChildren<ChangeCare>().tt.transform.position + CurrentPlayer.TransformDirection(Vector3.left);
+
 
         Debug.Log(HumanPrefab.transform.position.ToString() +  "Position of The Char");
         CurrentPlayer.gameObject.GetComponentInChildren< ChangeCare >().tt.enabled= false;
         CurrentPlayer.gameObject.GetComponentInChildren<ChangeCare>().CameraController.SetActive(false);
 
-       //CurrentPlayer.gameObject.SetActive(false);
-       //CurrentPlayer = NextPlayer;
-       NextPlayer = null;
+        //CurrentPlayer.gameObject.SetActive(false);
+        CurrentPlayer = NextPlayer;
+        NextPlayer = null;
         Debug.Log("End Exit Care ");
-        // HumanPrefab.transform.position = CurrentPlayer.position;
+
 
 
 
     }
 
-    
+
 
     public void EnterCre()
     {
