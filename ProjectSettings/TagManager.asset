@@ -11,6 +11,9 @@ TagManager:
   - IaCar
   - InUseCare
   - VObject
+  - CinemachineTarget
+  - Fire
+  - PlayerChar
   layers:
   - Default
   - TransparentFX

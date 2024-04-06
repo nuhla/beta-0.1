@@ -20,6 +20,8 @@ public class ChangeCare : MonoBehaviour
 
     private GameObject destenation;
 
+    private GameObject Player;
+
 
 
 
@@ -31,7 +33,7 @@ public class ChangeCare : MonoBehaviour
     /// </summary>
 
     // Start is called before the first frame update
- 
+
 
     private void SetCarOrder(GameObject Colider)
     {
@@ -39,13 +41,13 @@ public class ChangeCare : MonoBehaviour
 
         Debug.Log("Start Set Order ");
         trafficSystem.GetComponent<TrafficSystem>().player = Colider.transform.transform;
-            //CameraController.SetActive(false);
-            //tt.enabled = false;
+        //CameraController.SetActive(false);
+        //tt.enabled = false;
 
- 
-        gameManeger.GetComponent<GameManeger>().NextPlayer = destenation.transform;
 
-         gameManeger.GetComponent<GameManeger>().CurrentPlayer = this.transform.parent.transform;
+        //gameManeger.GetComponent<GameManeger>().NextPlayer = destenation.transform;
+
+        gameManeger.GetComponent<GameManeger>().CurrentPlayer = this.transform.parent.transform;
 
 
 
@@ -58,19 +60,24 @@ public class ChangeCare : MonoBehaviour
         if (transform != null)
         {
 
+            // if (other.transform.parent.gameObject.tag == "InUseCare")
+            // {
+            //     destenation = other.transform.parent.gameObject;
+            //     SetCarOrder(other.transform.parent.gameObject);
 
-            if (other.transform.parent.gameObject.tag == "InUseCare")
+            //     Debug.Log("OnTriggerEnter");
+            // }
+
+            if (other.transform.parent.gameObject.tag == "PlayerChar")
             {
-                destenation = other.transform.parent.gameObject;
-                SetCarOrder(other.transform.parent.gameObject);
+                Player = other.transform.parent.gameObject;
+                destenation = transform.parent.gameObject;
+                gameManeger.GetComponent<GameManeger>().NextPlayer = transform.parent;
 
-                Debug.Log("OnTriggerEnter");
+                Debug.Log("PlayerChar Trigger");
+            }
         }
     }
-    }
 
-    private void OnDestroy()
-    {
 
-    }
 }
