@@ -115,8 +115,6 @@ public class GameManeger : MonoBehaviour
 
 
 
-
-
     public void EnterCare()
     {
         Debug.Log("In the Enter Care ");
