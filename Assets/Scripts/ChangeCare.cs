@@ -12,10 +12,9 @@ public class ChangeCare : MonoBehaviour
 
 
     public GameObject trafficSystem;
+    [SerializeField] GameObject gameManeger;
 
     public Behaviour tt;
-
-    public GameObject destroyBehv;
 
     public GameObject CameraController;
 
@@ -34,30 +33,25 @@ public class ChangeCare : MonoBehaviour
     // Start is called before the first frame update
  
 
-    private void CopyComponent(GameObject Colider)
+    private void SetCarOrder(GameObject Colider)
     {
 
 
+        Debug.Log("Start Set Order ");
+        trafficSystem.GetComponent<TrafficSystem>().player = Colider.transform.transform;
+            //CameraController.SetActive(false);
+            //tt.enabled = false;
 
-        if (transform != null)
-        {
+ 
+        gameManeger.GetComponent<GameManeger>().NextPlayer = destenation.transform;
 
-
-            trafficSystem.GetComponent<TrafficSystem>().player = Colider.transform.transform;
-            CameraController.SetActive(false);
-            tt.enabled = false;
-
-            Debug.Log(Colider.transform.tag + "555555");
-
-            //Colider.GetComponent<ChangeCare>().GetComponent<TrafficSystem>().player = Colider.transform.transform;
-            destenation.GetComponent<ChangeCare>().CameraController.SetActive(true);
-        destenation.GetComponent<ChangeCare>().tt.enabled = true;
-            
-            this.transform.parent.gameObject.SetActive(false);
-            // Destroy(this);
+         gameManeger.GetComponent<GameManeger>().CurrentPlayer = this.transform.parent.transform;
 
 
-        }
+
+        Debug.Log("End Set Order ");
+
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -67,10 +61,10 @@ public class ChangeCare : MonoBehaviour
 
             if (other.transform.parent.gameObject.tag == "InUseCare")
             {
-                destenation = other.transform.gameObject;
-                CopyComponent(other.transform.parent.gameObject);
+                destenation = other.transform.parent.gameObject;
+                SetCarOrder(other.transform.parent.gameObject);
 
-                Debug.Log(" in If ");
+                Debug.Log("OnTriggerEnter");
         }
     }
     }
