@@ -67,34 +67,27 @@ public class GameManeger : MonoBehaviour
             **/
             if (CurrentPlayer != null)
             {
-                // here we check the speed in case the user is still driving 
-                if(CurrentPlayer.gameObject.GetComponentInChildren<VehicleBehaviour>().vehicle.speed > 0)
-                {
-                    Debug.Log(CurrentPlayer.gameObject.GetComponentInChildren<VehicleBehaviour>().vehicle.speed + " speed");
 
-                    CurrentPlayer.gameObject.GetComponentInChildren<VehicleBehaviour>().vehicle.enabled = false;
+                Debug.Log(CurrentPlayer.gameObject.GetComponentInChildren<VehicleBehaviour>().vehicle.speed + " speed");
 
-                    exsitCar();
+                CurrentPlayer.gameObject.GetComponentInChildren<VehicleBehaviour>().vehicle.enabled = false;
 
-
-                }
-                else
-                {
-                    // also show the user behind the care //
-                    /// affter that we disable the whole care from the sceen .
-                    ///  to Ride the secound Care
-                }
-
+                exsitCar();
 
             }
-            else
-            {
-                Debug.Log("current player is null");
-            }
 
 
-            Debug.Log(" KEYDOWN IS E" );
-            
+
+
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log(" KEYDOWN IS E");
+            EnterCare();
+
+
         }
 
 
@@ -102,7 +95,7 @@ public class GameManeger : MonoBehaviour
 
     public void exsitCar() {
 
-        Debug.Log("In Exit Care ");
+
         HumanPrefab.SetActive(true);
         HumanPrefab.transform.position = CurrentPlayer.gameObject.GetComponentInChildren<ChangeCare>().tt.transform.position +
         CurrentPlayer.TransformDirection(Vector3.left) + CurrentPlayer.TransformDirection(Vector3.left) + CurrentPlayer.TransformDirection(Vector3.up);
@@ -110,23 +103,37 @@ public class GameManeger : MonoBehaviour
 
         CurrentPlayer.gameObject.GetComponentInChildren< ChangeCare >().tt.enabled= false;
         CurrentPlayer.gameObject.GetComponentInChildren<ChangeCare>().CameraController.SetActive(false);
-        //CurrentPlayer = NextPlayer;
+        CurrentPlayer.gameObject.SetActive(false);
+        CurrentPlayer = null;
         //NextPlayer = null;
 
         Debug.Log("End Exit Care ");
+
+
 
     }
 
 
 
-    public void EnterCre()
-    {
-        HumanPrefab.SetActive(false);
 
-        /*--------------------- Switch Cars If User Wants ----------------------
-             CurrentPlayer.GetComponent<ChangeCare>().CameraController.SetActive(true);
-             CurrentPlayer.GetComponent<ChangeCare>().tt.enabled = true;
-             */
+
+    public void EnterCare()
+    {
+        Debug.Log("In the Enter Care ");
+        if (NextPlayer != null)
+        {
+            Debug.Log("Necxt Player Is Not Null");
+            CurrentPlayer = NextPlayer;
+            NextPlayer = null;
+            HumanPrefab.SetActive(false);
+            CurrentPlayer.gameObject.GetComponentInChildren<ChangeCare>().tt.enabled = true;
+            CurrentPlayer.gameObject.GetComponentInChildren<ChangeCare>().CameraController.SetActive(true);
+            trafficSystem.GetComponent<TrafficSystem>().player = CurrentPlayer.transform.transform;
+
+        }
+
+
+
     }
 
 
