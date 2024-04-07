@@ -27,10 +27,10 @@ public class GameManeger : MonoBehaviour
         if(trafficSystem != null)
         {
 
-            Debug.Log(" traffic system is not null");
-            CurrentPlayer = trafficSystem.GetComponent<TrafficSystem>().player;
+            // Debug.Log(" traffic system is not null");
+            // CurrentPlayer = trafficSystem.GetComponent<TrafficSystem>().player;
 
-            Debug.Log(CurrentPlayer.gameObject.name);
+            // Debug.Log(CurrentPlayer.gameObject.name);
         }
         else if(trafficSystem == null)
         {
@@ -65,16 +65,13 @@ public class GameManeger : MonoBehaviour
              * we will get the curren user and stope the cat 
              * if there is a nother care to Ride 
             **/
-            if (CurrentPlayer != null)
-            {
 
-                Debug.Log(CurrentPlayer.gameObject.GetComponentInChildren<VehicleBehaviour>().vehicle.speed + " speed");
 
-                CurrentPlayer.gameObject.GetComponentInChildren<VehicleBehaviour>().vehicle.enabled = false;
+            Debug.Log(CurrentPlayer.gameObject.GetComponentInChildren<VehicleBehaviour>().vehicle.speed + " speed");
+
+            CurrentPlayer.gameObject.GetComponentInChildren<VehicleBehaviour>().vehicle.enabled = false;
 
                 exsitCar();
-
-            }
 
 
 
@@ -96,9 +93,10 @@ public class GameManeger : MonoBehaviour
     public void exsitCar() {
 
 
-        HumanPrefab.SetActive(true);
-        HumanPrefab.transform.position = CurrentPlayer.gameObject.GetComponentInChildren<ChangeCare>().tt.transform.position +
-        CurrentPlayer.TransformDirection(Vector3.left) + CurrentPlayer.TransformDirection(Vector3.left) + CurrentPlayer.TransformDirection(Vector3.up);
+        HumanPrefab.transform.parent.gameObject.SetActive(true);
+        Debug.Log(CurrentPlayer.gameObject.tag + " uuuuuuuuuuuuuuuuus");
+        HumanPrefab.transform.position = CurrentPlayer.position +
+        CurrentPlayer.TransformDirection(Vector3.left) + CurrentPlayer.TransformDirection(Vector3.up);
 
 
         CurrentPlayer.gameObject.GetComponentInChildren< ChangeCare >().tt.enabled= false;
@@ -123,10 +121,10 @@ public class GameManeger : MonoBehaviour
             Debug.Log("Necxt Player Is Not Null");
             CurrentPlayer = NextPlayer;
             NextPlayer = null;
-            HumanPrefab.SetActive(false);
+            HumanPrefab.transform.parent.gameObject.SetActive(false);
             CurrentPlayer.gameObject.GetComponentInChildren<ChangeCare>().tt.enabled = true;
             CurrentPlayer.gameObject.GetComponentInChildren<ChangeCare>().CameraController.SetActive(true);
-            trafficSystem.GetComponent<TrafficSystem>().player = CurrentPlayer.transform.transform;
+            trafficSystem.GetComponent<TrafficSystem>().player = CurrentPlayer.parent.transform;
 
         }
 

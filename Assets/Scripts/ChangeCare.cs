@@ -40,8 +40,7 @@ public class ChangeCare : MonoBehaviour
 
 
         Debug.Log("Start Set Order ");
-        trafficSystem.GetComponent<TrafficSystem>().player = Colider.transform.transform;
-        //CameraController.SetActive(false);
+        trafficSystem.GetComponent<TrafficSystem>().player = Colider.transform.parent;        //CameraController.SetActive(false);
         //tt.enabled = false;
 
 
@@ -72,7 +71,7 @@ public class ChangeCare : MonoBehaviour
             {
                 Player = other.transform.parent.gameObject;
                 destenation = transform.parent.gameObject;
-                gameManeger.GetComponent<GameManeger>().NextPlayer = transform.parent;
+                gameManeger.GetComponent<GameManeger>().NextPlayer = transform;
 
                 Debug.Log("PlayerChar Trigger");
             }
