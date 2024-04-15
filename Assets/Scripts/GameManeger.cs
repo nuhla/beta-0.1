@@ -36,6 +36,7 @@ public class GameManeger : MonoBehaviour
 
                     car.gameObject.GetComponentInChildren<ChangeCare>().tt.enabled = false;
                     car.gameObject.GetComponentInChildren<ChangeCare>().CameraController.SetActive(false);
+                    //car.gameObject.GetComponentInChildren<VPVehicleController>().enabled = false;
 
                 }
 
@@ -75,11 +76,12 @@ public class GameManeger : MonoBehaviour
              * if there is a nother care to Ride 
             **/
 
-            Debug.Log(CurrentPlayer.gameObject.GetComponentInChildren<VehicleBehaviour>().vehicle.speed + " speed");
+
 
             CurrentPlayer.gameObject.GetComponentInChildren<VehicleBehaviour>().vehicle.enabled = false;
+            //CurrentPlayer.gameObject.GetComponentInChildren<VPVehicleController>().enabled = false;
 
-                exsitCar();
+            exsitCar();
 
         }
 
@@ -128,6 +130,7 @@ public class GameManeger : MonoBehaviour
             HumanPrefab.transform.parent.gameObject.SetActive(false);
             CurrentPlayer.gameObject.GetComponentInChildren<ChangeCare>().tt.enabled = true;
             CurrentPlayer.gameObject.GetComponentInChildren<ChangeCare>().CameraController.SetActive(true);
+
             trafficSystem.GetComponent<TrafficSystem>().player = CurrentPlayer.parent.transform;
 
         }
