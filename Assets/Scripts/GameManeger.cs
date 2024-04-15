@@ -10,11 +10,12 @@ public class GameManeger : MonoBehaviour
 
     [SerializeField] GameObject trafficSystem;
     [SerializeField] GameObject HumanPrefab;
-    
+    [SerializeField] List<GameObject> CarsList;
 
     public Transform CurrentPlayer;
     public Transform PrevoiusePlayer;
     public Transform NextPlayer = null;
+
 
 
     private void Start()
@@ -27,10 +28,18 @@ public class GameManeger : MonoBehaviour
         if(trafficSystem != null)
         {
 
-            // Debug.Log(" traffic system is not null");
-            // CurrentPlayer = trafficSystem.GetComponent<TrafficSystem>().player;
+            if (CarsList.Count != 0)
+            {
 
-            // Debug.Log(CurrentPlayer.gameObject.name);
+                foreach (GameObject car in CarsList)
+                {
+
+                    car.gameObject.GetComponentInChildren<ChangeCare>().tt.enabled = false;
+                    car.gameObject.GetComponentInChildren<ChangeCare>().CameraController.SetActive(false);
+
+                }
+
+            }
         }
         else if(trafficSystem == null)
         {
@@ -66,16 +75,11 @@ public class GameManeger : MonoBehaviour
              * if there is a nother care to Ride 
             **/
 
-
             Debug.Log(CurrentPlayer.gameObject.GetComponentInChildren<VehicleBehaviour>().vehicle.speed + " speed");
 
             CurrentPlayer.gameObject.GetComponentInChildren<VehicleBehaviour>().vehicle.enabled = false;
 
                 exsitCar();
-
-
-
-
 
         }
 
@@ -101,7 +105,7 @@ public class GameManeger : MonoBehaviour
 
         CurrentPlayer.gameObject.GetComponentInChildren< ChangeCare >().tt.enabled= false;
         CurrentPlayer.gameObject.GetComponentInChildren<ChangeCare>().CameraController.SetActive(false);
-        CurrentPlayer.gameObject.SetActive(false);
+        //CurrentPlayer.gameObject.SetActive(false);
         CurrentPlayer = null;
         //NextPlayer = null;
 
